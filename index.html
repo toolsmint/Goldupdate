@@ -7,90 +7,172 @@
 <!-- Google Search Console Verification -->
 <meta name="google-site-verification" content="w-01iFkAzIGGbxIb2nXDW2TESyJYSEu56oQzlH3SCoY" />
 
-<title>Live Gold Price Today | USD, PKR, EUR | Gold Charts & Rates</title>
-<meta name="description" content="Check live gold price in USD, PKR, EUR. View gold charts, 24K gold rates, and stay updated on precious metals.">
-<meta name="keywords" content="Gold price, live gold price, gold rate today, gold price USD, gold price PKR, XAUUSD, 24K gold rate, gold chart, precious metals">
+<title>Live Gold Price Today (Global) – XAUUSD, USD, PKR, EUR + Gold Calculator</title>
+
+<meta name="description" content="Live gold price today worldwide. Check XAUUSD rates in USD, PKR, EUR with gold calculator, converter and live chart.">
 
 <style>
 body { margin:0; font-family:Arial; background:#0d0d0d; color:white; text-align:center; }
-header { background:linear-gradient(135deg,#bfa43f,#f7d976); color:#000; padding:30px; }
-header h1 { margin:0; }
-header p { font-size:16px; color:#111; margin-top:10px; }
-.grid { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:30px; }
-.card { background:#161616; border:1px solid gold; padding:20px; border-radius:10px; width:170px; }
-.price { font-size:22px; color:gold; margin-top:10px; }
-#chart { margin:40px auto; width:95%; max-width:900px; }
-footer { border-top:1px solid gold; padding:20px; color:#aaa; }
-#keywords { padding:20px; margin-top:20px; background:#111; border-radius:10px; width:90%; max-width:900px; margin-left:auto; margin-right:auto; }
-#keywords h2 { color:gold; }
-#keywords p { color:#ccc; line-height:1.5; }
+
+header {
+  background:linear-gradient(135deg,#bfa43f,#f7d976);
+  color:#000;
+  padding:30px;
+}
+
+.grid {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  padding:30px;
+}
+
+.card {
+  background:#161616;
+  border:1px solid gold;
+  padding:20px;
+  border-radius:12px;
+  width:180px;
+}
+
+.price { font-size:22px; color:gold; }
+
+.section {
+  background:#111;
+  margin:20px auto;
+  padding:20px;
+  width:90%;
+  max-width:900px;
+  border-radius:10px;
+}
+
+input, select {
+  padding:10px;
+  margin:5px;
+  border-radius:5px;
+  border:none;
+}
+
+button {
+  padding:10px 20px;
+  background:gold;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+#result { margin-top:10px; color:gold; }
+
+footer { padding:20px; color:#aaa; border-top:1px solid gold; }
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Live Gold Price Today</h1>
-  <p>Check <strong>Gold price</strong> in <strong>USD, PKR, EUR</strong>, view <strong>gold charts</strong>, and stay updated on <strong>24K gold rates</strong>.</p>
+<h1>🌍 Live Gold Price Today</h1>
+<p>Global gold rates in USD, PKR, EUR + Calculator + Live Chart</p>
+<p><strong>Last Updated:</strong> April 2026</p>
 </header>
 
+<!-- PRICE GRID -->
 <div class="grid" id="grid">Loading...</div>
 
-<section id="keywords">
-  <h2>Gold Price</h2>
-  <p>
-    Gold price, live gold price, gold rate today, gold price USD, gold price PKR, XAUUSD, 24K gold rate, gold chart, precious metals
-  </p>
-</section>
+<!-- CALCULATOR -->
+<div class="section">
+<h2>Gold Calculator</h2>
 
-<div id="chart">
-  <div id="tradingview_chart"></div>
+<input type="number" id="amount" placeholder="Enter value">
+<select id="unit">
+  <option value="gram">Gram</option>
+  <option value="tola">Tola</option>
+</select>
+
+<select id="currency">
+  <option value="USD">USD</option>
+  <option value="PKR">PKR</option>
+  <option value="EUR">EUR</option>
+</select>
+
+<br>
+<button onclick="calculate()">Calculate</button>
+
+<div id="result"></div>
+</div>
+
+<!-- CONTENT -->
+<div class="section">
+<h2>About Gold Price</h2>
+<p>
+Gold price is determined globally by XAUUSD market. It changes based on demand, inflation,
+USD strength and global economic conditions. Investors use gold as a safe asset.
+</p>
+</div>
+
+<!-- CHART -->
+<div class="section">
+<div id="tradingview_chart"></div>
 </div>
 
 <footer>© 2026 GoldWatch</footer>
 
-<!-- TradingView -->
 <script src="https://s3.tradingview.com/tv.js"></script>
 
 <script>
-const currencies = [
-  {code:'USD', symbol:'$', rate:1},
-  {code:'PKR', symbol:'Rs', rate:278},
-  {code:'EUR', symbol:'€', rate:0.92}
-];
+const rates = {
+  USD:1,
+  PKR:278,
+  EUR:0.92
+};
 
-let goldPrice = 3200; // default fallback price
+let goldPrice = 3200;
 
-async function loadGold() {
-  try {
+// FETCH GOLD PRICE
+async function loadGold(){
+  try{
     let res = await fetch("https://api.metals.live/v1/spot/gold");
-    if(res.ok){
-      let data = await res.json();
-      if(data && data[0] && data[0].gold){
-        goldPrice = data[0].gold;
-      }
-    }
-  } catch(e) {
-    console.log("API failed, using fallback");
+    let data = await res.json();
+    goldPrice = data[0].gold;
+  }catch(e){
+    console.log("API error");
   }
-  renderPrices();
+  render();
 }
 
-function renderPrices(){
-  let html = '';
-  currencies.forEach(c => {
-    let price = goldPrice * c.rate;
+// RENDER CARDS
+function render(){
+  let html='';
+  for(let cur in rates){
+    let price = goldPrice * rates[cur];
     html += `
-      <div class="card">
-        <div>${c.code} / oz</div>
-        <div class="price">${c.symbol}${price.toFixed(2)}</div>
-      </div>
-    `;
-  });
+    <div class="card">
+      <div>${cur}</div>
+      <div class="price">${price.toFixed(2)}</div>
+    </div>`;
+  }
   document.getElementById("grid").innerHTML = html;
 }
 
-// SAFE chart load
+// CALCULATOR
+function calculate(){
+  let amt = document.getElementById("amount").value;
+  let unit = document.getElementById("unit").value;
+  let cur = document.getElementById("currency").value;
+
+  let gramPrice = goldPrice / 31.1;
+  let value = 0;
+
+  if(unit === "gram") value = amt * gramPrice;
+  if(unit === "tola") value = amt * (gramPrice * 11.66);
+
+  value = value * rates[cur];
+
+  document.getElementById("result").innerText = 
+    "Value: " + value.toFixed(2) + " " + cur;
+}
+
+// CHART
 function loadChart(){
   if(typeof TradingView !== "undefined"){
     new TradingView.widget({
@@ -104,11 +186,10 @@ function loadChart(){
   }
 }
 
-// RUN
 window.onload = function(){
   loadGold();
   loadChart();
-  setInterval(loadGold, 60000);
+  setInterval(loadGold,60000);
 };
 </script>
 
