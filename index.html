@@ -1,38 +1,74 @@
-<script>
-async function fetchPrices() {
-  const priceGrid = document.getElementById('price-grid');
-  const lastUpdate = document.getElementById('last-update');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gold Price Update | Live Rates 2026</title>
+  <meta name="description" content="Check live gold prices and trends worldwide. Updated in real-time. Stay informed with accurate gold rates.">
+  <meta name="keywords" content="gold price, live gold rates, gold chart, gold update, 2026 gold rates">
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Gold_ingot_icon.png/64px-Gold_ingot_icon.png">
 
-  try {
-    // Sample free API (XAU to USD, EUR, GBP, INR)
-    const response = await fetch('https://api.metals.live/v1/spot/gold');
-    const data = await response.json();
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
+    header { background: #bfa600; color: white; padding: 20px; text-align: center; }
+    main { padding: 20px; max-width: 800px; margin: auto; }
+    h1 { margin-bottom: 10px; }
+    .price { font-size: 2em; font-weight: bold; color: #bfa600; }
+    canvas { background: white; border-radius: 10px; margin-top: 20px; }
+    footer { text-align: center; padding: 20px; margin-top: 40px; color: #666; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Live Gold Price Update</h1>
+    <div class="price" id="goldPrice">$0.00</div>
+  </header>
 
-    // Clear previous cards
-    priceGrid.innerHTML = '';
+  <main>
+    <h2>Gold Price Trend</h2>
+    <canvas id="goldChart" width="400" height="200"></canvas>
+  </main>
 
-    // Example: data[0] = { price: 1960, currency: "USD" }
-    const currencies = ['USD', 'EUR', 'GBP', 'INR'];
-    currencies.forEach(curr => {
-      const price = data.find(d => d.currency === curr)?.price || 'N/A';
-      const card = document.createElement('div');
-      card.className = 'currency-card';
-      card.innerHTML = `
-        <div class="card-currency">${curr}</div>
-        <div class="card-price">${price}</div>
-      `;
-      priceGrid.appendChild(card);
+  <footer>
+    &copy; 2026 Goldupdate. All rights reserved.
+  </footer>
+
+  <script>
+    // Dummy price updater
+    const goldPriceEl = document.getElementById('goldPrice');
+
+    function updatePrice() {
+      // Random dummy gold price
+      const price = (1800 + Math.random() * 100).toFixed(2);
+      goldPriceEl.innerText = `$${price}`;
+    }
+
+    setInterval(updatePrice, 2000); // Update every 2 seconds
+    updatePrice();
+
+    // Chart.js gold trend example
+    const ctx = document.getElementById('goldChart').getContext('2d');
+    const goldChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: Array.from({length: 10}, (_, i) => `T-${10-i}`),
+        datasets: [{
+          label: 'Gold Price $',
+          data: Array.from({length: 10}, () => (1800 + Math.random()*100).toFixed(2)),
+          borderColor: '#bfa600',
+          backgroundColor: 'rgba(191,166,0,0.2)',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: true } },
+        scales: { y: { beginAtZero: false } }
+      }
     });
-
-    lastUpdate.textContent = 'Last update: ' + new Date().toLocaleTimeString();
-  } catch (err) {
-    console.error(err);
-    lastUpdate.textContent = 'Failed to fetch prices';
-  }
-}
-
-// Initial fetch
-fetchPrices();
-// Auto update every 60s
-setInterval(fetchPrices, 60000);
-</script>
+  </script>
+</body>
+</html>
