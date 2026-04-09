@@ -4,19 +4,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Live Gold Price Today – USD, PKR, EUR | Gold Chart & Rates</title>
-<meta name="description" content="Check live gold price today in USD, PKR, EUR. View real-time gold charts, 24K rates, and daily market updates.">
-<meta name="keywords" content="gold price today, live gold rate, gold price Pakistan, xauusd, 24k gold price, gold chart">
+<title>Live Gold Price Today – USD, PKR, EUR | 24K Gold Rates & Chart</title>
+
+<meta name="description" content="Check live gold price today in USD, PKR, EUR. Get real-time 24K gold rates, per ounce prices, and live market charts updated daily.">
+<meta name="keywords" content="gold price today, live gold rate, gold price Pakistan, 24k gold price, xauusd, gold chart, gold ounce price">
 
 <meta name="google-site-verification" content="w-01iFkAzIGGbxIb2nXDW2TESyJYSEu56oQzlH3SCoY" />
 
+<!-- OG TAGS (SOCIAL SEO) -->
+<meta property="og:title" content="Live Gold Price Today">
+<meta property="og:description" content="Live gold rates in USD, PKR, EUR with charts and updates.">
+<meta property="og:type" content="website">
+
+<!-- SEO SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Gold Price Update",
+  "url": "https://toolsmint.github.io/Goldupdate/"
+}
+</script>
+
 <style>
 body { margin:0; font-family:Arial; background:#0b0b0b; color:#fff; }
-header { padding:40px; text-align:center; background:linear-gradient(135deg,#c9a227,#f5d76e); color:#000; }
+
+header {
+  padding:35px;
+  text-align:center;
+  background:linear-gradient(135deg,#c9a227,#f5d76e);
+  color:#000;
+}
 
 h1 { margin:0; font-size:30px; }
 
 .container { max-width:1100px; margin:auto; padding:20px; }
+
+.live {
+  color:#00ff99;
+  font-weight:bold;
+}
 
 #chart {
   margin-top:20px;
@@ -60,6 +87,8 @@ footer {
   margin-top:40px;
   color:#aaa;
 }
+
+.small { font-size:12px; color:#aaa; margin-top:5px; }
 </style>
 
 </head>
@@ -68,12 +97,13 @@ footer {
 
 <header>
   <h1>Live Gold Price Today</h1>
-  <p>Real-time Gold Rates in USD, PKR, EUR + Live Market Chart</p>
+  <p>Real-time Gold Rates in USD, PKR, EUR <span class="live">● LIVE</span></p>
+  <div class="small">Last Updated: <span id="time"></span></div>
 </header>
 
 <div class="container">
 
-<!-- 1️⃣ CHART (VISUAL TOP) -->
+<!-- CHART -->
 <section>
 <h2>Live Gold Chart (XAU/USD)</h2>
 <div id="chart">
@@ -81,27 +111,28 @@ footer {
 </div>
 </section>
 
-<!-- 2️⃣ LIVE PRICES -->
+<!-- PRICES -->
 <div class="grid" id="grid">Loading live prices...</div>
 
-<!-- 3️⃣ MARKET INSIGHT -->
+<!-- SEO CONTENT -->
 <section>
-<h2>Market Insight</h2>
+<h2>About Gold Prices</h2>
 <p>
-Gold price changes daily due to global demand, USD value, inflation, and financial markets.
-This page provides live updates for 24K gold price, per ounce gold rate, and gold price in Pakistan.
+Gold price changes daily due to global demand, USD value, inflation, and economic conditions. 
+This page provides live updates for 24K gold price, per ounce gold rate, and gold price in Pakistan (PKR).
+Gold is one of the most traded precious metals in the world and its value is affected by global financial markets.
 </p>
 </section>
 
-<!-- 4️⃣ CONVERTER INFO (optional placeholder) -->
+<!-- INFO -->
 <section>
-<h2>Gold Price Information</h2>
+<h2>Gold Market Information</h2>
 <p>
-You can track live gold rates in USD, PKR, and EUR. Prices are updated automatically based on global market data.
+You can track live gold rates in USD, PKR, and EUR with real-time updates. Investors use gold as a safe-haven asset during inflation and economic uncertainty.
 </p>
 </section>
 
-<!-- 5️⃣ FAQ -->
+<!-- FAQ -->
 <section>
 <h2>FAQ – Gold Price</h2>
 
@@ -109,7 +140,7 @@ You can track live gold rates in USD, PKR, and EUR. Prices are updated automatic
 Gold price is the current market value of gold per ounce or gram.</p>
 
 <p><strong>Why does gold price change?</strong><br>
-It changes due to USD rate, global demand, and economic conditions.</p>
+It changes due to USD strength, global demand, inflation, and market conditions.</p>
 
 <p><strong>What is 24K gold?</strong><br>
 24K gold is pure gold with 99.9% purity.</p>
@@ -120,7 +151,41 @@ It changes due to USD rate, global demand, and economic conditions.</p>
 
 <footer>© 2026 Gold Price Update – All Rights Reserved</footer>
 
-<!-- TradingView -->
+<!-- FAQ SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is gold price today?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gold price is the current market value of gold per ounce or gram."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does gold price change?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gold price changes due to USD value, global demand, inflation, and market conditions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is 24K gold?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "24K gold is pure gold with 99.9% purity."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- TRADINGVIEW -->
 <script src="https://s3.tradingview.com/tv.js"></script>
 
 <script>
@@ -131,6 +196,10 @@ const currencies = [
 ];
 
 let goldPrice = 3200;
+
+function updateTime(){
+  document.getElementById("time").innerText = new Date().toLocaleString();
+}
 
 async function loadGold(){
   try {
@@ -171,9 +240,11 @@ function loadChart(){
 }
 
 window.onload = function(){
+  updateTime();
   loadGold();
   loadChart();
   setInterval(loadGold, 60000);
+  setInterval(updateTime, 1000);
 };
 </script>
 
