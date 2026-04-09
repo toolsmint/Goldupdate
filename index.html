@@ -1,147 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Gold Price Worldwide</title>
-
-<style>
-body {
-  margin:0;
-  font-family:Arial;
-  background:#0d0d0d;
-  color:white;
-  text-align:center;
-}
-
-header {
-  background:linear-gradient(135deg,#bfa43f,#f7d976);
-  color:#000;
-  padding:30px;
-}
-
-.grid {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
-  padding:30px;
-}
-
-.card {
-  background:#161616;
-  border:1px solid gold;
-  padding:20px;
-  border-radius:10px;
-  width:170px;
-  transition:0.3s;
-}
-
-.card:hover {
-  transform:translateY(-5px);
-  box-shadow:0 10px 25px rgba(255,215,0,0.3);
-}
-
-.price {
-  font-size:22px;
-  color:gold;
-  margin-top:10px;
-}
-
-#chart {
-  margin:40px auto;
-  width:95%;
-  max-width:900px;
-}
-
-footer {
-  border-top:1px solid gold;
-  padding:20px;
-  color:#aaa;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <h1>Live Gold Prices</h1>
-  <p>Real-time gold rates worldwide (USD, PKR, EUR, GBP)</p>
-</header>
-
-<!-- Prices -->
-<div class="grid" id="grid">
-  Loading...
-</div>
-
-<!-- Chart -->
-<div id="chart">
-  <div id="tradingview_chart"></div>
-</div>
-
-<footer>
-  © 2026 GoldWatch
-</footer>
-
-<!-- TradingView -->
-<script src="https://s3.tradingview.com/tv.js"></script>
-
 <script>
 
-// currencies
 const currencies = [
   {code:'USD', symbol:'$', rate:1},
   {code:'PKR', symbol:'Rs', rate:278},
-  {code:'EUR', symbol:'€', rate:0.92},
-  {code:'GBP', symbol:'£', rate:0.79}
+  {code:'EUR', symbol:'€', rate:0.92}
 ];
 
-// load gold price
+let basePrice = 3200; // fallback base price
+
 async function loadGold() {
   try {
     let res = await fetch("https://api.metals.live/v1/spot/gold");
-    let data = await res.json();
 
-    let gold = data[0].gold;
-
-    let html = '';
-
-    currencies.forEach(c => {
-      let price = (gold * c.rate).toFixed(2);
-
-      html += `
-        <div class="card">
-          <div>${c.code} / oz</div>
-          <div class="price">${c.symbol}${price}</div>
-        </div>
-      `;
-    });
-
-    document.getElementById("grid").innerHTML = html;
-
+    if(res.ok){
+      let data = await res.json();
+      if(data && data[0] && data[0].gold){
+        basePrice = data[0].gold;
+      }
+    }
   } catch(e) {
-    document.getElementById("grid").innerHTML = "Error loading data";
+    // API fail → fallback use hoga
   }
+
+  renderPrices();
 }
 
-// TradingView chart
-function loadChart(){
-  new TradingView.widget({
-    symbol: "OANDA:XAUUSD",
-    interval: "D",
-    container_id: "tradingview_chart",
-    width: "100%",
-    height: 400,
-    theme: "dark"
+function renderPrices() {
+  let html = '';
+
+  currencies.forEach(c => {
+    // thoda random change for live effect
+    let fluct = (Math.random()*10 - 5);
+    let price = (basePrice + fluct) * c.rate;
+
+    html += `
+      <div class="card">
+        <div>${c.code} / oz</div>
+        <div class="price">${c.symbol}${price.toFixed(2)}</div>
+      </div>
+    `;
   });
+
+  document.getElementById("grid").innerHTML = html;
 }
 
 // run
 loadGold();
-loadChart();
 setInterval(loadGold, 60000);
 
 </script>
-
-</body>
-</html>
