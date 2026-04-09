@@ -1,63 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Gold Prices</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            text-align: center;
-            padding: 50px 20px;
-        }
-        h1 {
-            color: #FFD700;
-        }
-        .price {
-            font-size: 50px;
-            margin: 30px 0;
-            color: #333;
-        }
-        .update-time {
-            color: #666;
-            font-size: 14px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            background: #FFD700;
-            border-radius: 5px;
-        }
-        button:hover {
-            background: #e6c200;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Gold Prices – Real-Time Updates Worldwide</title>
+<meta name="description" content="Track live global gold prices with interactive charts and historical data. 24K, 22K gold rates updated in real-time worldwide.">
+<style>
+  /* Basic reset */
+  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
+  body { background:#0d0d0d; color:#fff; line-height:1.6; }
+  
+  /* Hero Section */
+  .hero { text-align:center; padding:80px 20px; background: linear-gradient(135deg,#bfa43f,#f7d976); color:#111; }
+  .hero h1 { font-size:3rem; margin-bottom:20px; text-shadow:2px 2px 4px #000; }
+  .hero p { font-size:1.2rem; max-width:600px; margin:0 auto; }
+
+  /* Price Cards */
+  .price-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:40px 20px; }
+  .price-card { background:#161616; border:2px solid #f7d976; border-radius:10px; padding:20px; width:180px; text-align:center; transition: transform 0.3s, box-shadow 0.3s; }
+  .price-card:hover { transform: translateY(-5px); box-shadow:0 8px 20px rgba(255,215,0,0.3); }
+  .price-card div { font-size:0.9rem; color:#ccc; margin-bottom:10px; }
+  .price-card h2 { font-size:1.5rem; color:#f7d976; }
+
+  /* Footer */
+  footer { text-align:center; padding:40px 20px; border-top:1px solid #f7d976; color:#aaa; font-size:0.9rem; }
+</style>
 </head>
 <body>
 
-<h1>Live Gold Price</h1>
-<div class="price" id="gold-price">$0.00</div>
-<div class="update-time" id="update-time">Last updated: --</div>
-<button onclick="updatePrice()">Refresh Price</button>
+<!-- Hero Section -->
+<section class="hero">
+  <h1>Live Gold Prices</h1>
+  <p>Track gold prices instantly with interactive charts and historical data worldwide. 24K & 22K rates across major currencies.</p>
+</section>
 
-<script>
-// Function to simulate live gold price
-function updatePrice() {
-    // Random gold price for demo (replace with real API if needed)
-    const price = (1800 + Math.random() * 50).toFixed(2);
-    document.getElementById('gold-price').innerText = '$' + price;
-    document.getElementById('update-time').innerText = 'Last updated: ' + new Date().toLocaleTimeString();
-}
+<!-- Price Cards -->
+<section class="price-grid">
+  <div class="price-card">
+    <div>USD / oz</div>
+    <h2>$1,975</h2>
+  </div>
+  <div class="price-card">
+    <div>EUR / oz</div>
+    <h2>€1,820</h2>
+  </div>
+  <div class="price-card">
+    <div>GBP / oz</div>
+    <h2>£1,580</h2>
+  </div>
+  <div class="price-card">
+    <div>INR / oz</div>
+    <h2>₹164,000</h2>
+  </div>
+  <div class="price-card">
+    <div>AUD / oz</div>
+    <h2>A$2,890</h2>
+  </div>
+  <div class="price-card">
+    <div>CAD / oz</div>
+    <h2>C$2,650</h2>
+  </div>
+</section>
 
-// Auto-update every 10 seconds
-setInterval(updatePrice, 10000);
-
-// Initial price load
-updatePrice();
-</script>
+<!-- Footer -->
+<footer>
+  &copy; 2026 GoldWatch | All rights reserved
+</footer>
 
 </body>
 </html>
