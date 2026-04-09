@@ -3,66 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Gold Prices – Real-Time Updates Worldwide</title>
-<meta name="description" content="Track live global gold prices with interactive charts and historical data. 24K, 22K gold rates updated in real-time worldwide.">
+<title>Live Gold Price - Real Time</title>
+
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
-  body { background:#0d0d0d; color:#fff; line-height:1.6; }
-  .hero { text-align:center; padding:80px 20px; background: linear-gradient(135deg,#bfa43f,#f7d976); color:#111; }
-  .hero h1 { font-size:3rem; margin-bottom:20px; text-shadow:2px 2px 4px #000; }
-  .hero p { font-size:1.2rem; max-width:600px; margin:0 auto; }
-  .price-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:40px 20px; }
-  .price-card { background:#161616; border:2px solid #f7d976; border-radius:10px; padding:20px; width:180px; text-align:center; transition: transform 0.3s, box-shadow 0.3s; }
-  .price-card:hover { transform: translateY(-5px); box-shadow:0 8px 20px rgba(255,215,0,0.3); }
-  .price-card div { font-size:0.9rem; color:#ccc; margin-bottom:10px; }
-  .price-card h2 { font-size:1.5rem; color:#f7d976; }
-  footer { text-align:center; padding:40px 20px; border-top:1px solid #f7d976; color:#aaa; font-size:0.9rem; }
+body {
+  margin:0;
+  font-family: Arial;
+  background:#0d0d0d;
+  color:white;
+  text-align:center;
+}
+
+/* Header */
+header {
+  background:linear-gradient(135deg,#bfa43f,#f7d976);
+  color:#000;
+  padding:30px;
+}
+header h1 { margin:0; }
+
+/* Grid */
+.grid {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  padding:40px 20px;
+}
+
+/* Card */
+.card {
+  background:#161616;
+  border:1px solid gold;
+  padding:20px;
+  border-radius:10px;
+  width:180px;
+  transition:0.3s;
+}
+.card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(255,215,0,0.3);
+}
+.price {
+  font-size:22px;
+  color:gold;
+  margin-top:10px;
+}
+
+/* Footer */
+footer {
+  border-top:1px solid gold;
+  padding:20px;
+  color:#aaa;
+}
 </style>
 </head>
+
 <body>
 
-<section class="hero">
+<header>
   <h1>Live Gold Prices</h1>
-  <p>Track gold prices instantly with interactive charts and historical data worldwide. 24K & 22K rates across major currencies.</p>
-</section>
+  <p>Real-time gold price worldwide</p>
+</header>
 
-<section class="price-grid" id="prices">
-  <!-- Cards will be auto-inserted here by JS -->
-</section>
+<div class="grid" id="grid">
+  Loading...
+</div>
 
 <footer>
-  &copy; 2026 GoldWatch | All rights reserved
+  © 2026 GoldWatch
 </footer>
 
 <script>
-// Simulated live prices
+
+// currencies
 const currencies = [
-  { code:'USD', symbol:'$', rate:1975 },
-  { code:'EUR', symbol:'€', rate:1820 },
-  { code:'GBP', symbol:'£', rate:1580 },
-  { code:'INR', symbol:'₹', rate:164000 },
-  { code:'AUD', symbol:'A$', rate:2890 },
-  { code:'CAD', symbol:'C$', rate:2650 }
+  {code:'USD', symbol:'$', rate:1},
+  {code:'EUR', symbol:'€', rate:0.92},
+  {code:'GBP', symbol:'£', rate:0.79},
+  {code:'INR', symbol:'₹', rate:83},
+  {code:'PKR', symbol:'Rs', rate:278}
 ];
 
-function updatePrices() {
-  const container = document.getElementById('prices');
-  container.innerHTML = '';
-  currencies.forEach(curr => {
-    // Random small fluctuation to simulate live price
-    let fluct = (Math.random()*10-5).toFixed(2);
-    let price = (curr.rate + parseFloat(fluct)).toLocaleString();
-    const card = document.createElement('div');
-    card.className = 'price-card';
-    card.innerHTML = `<div>${curr.code} / oz</div><h2>${curr.symbol}${price}</h2>`;
-    container.appendChild(card);
-  });
+// fetch real gold price
+async function loadGold() {
+  try {
+    let res = await fetch("https://api.metals.live/v1/spot/gold");
+    let data = await res.json();
+
+    let gold = data[0].gold;
+
+    let html = '';
+
+    currencies.forEach(c => {
+      let price = (gold * c.rate).toFixed(2);
+
+      html += `
+        <div class="card">
+          <div>${c.code} / oz</div>
+          <div class="price">${c.symbol}${price}</div>
+        </div>
+      `;
+    });
+
+    document.getElementById("grid").innerHTML = html;
+
+  } catch(e) {
+    document.getElementById("grid").innerHTML = "Error loading data";
+  }
 }
 
-// Initial load
-updatePrices();
-// Update every 5 seconds
-setInterval(updatePrices, 5000);
+// load + auto refresh
+loadGold();
+setInterval(loadGold, 60000);
+
 </script>
 
 </body>
