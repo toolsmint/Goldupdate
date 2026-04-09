@@ -1,74 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gold Price Update | Live Rates 2026</title>
-  <meta name="description" content="Check live gold prices and trends worldwide. Updated in real-time. Stay informed with accurate gold rates.">
-  <meta name="keywords" content="gold price, live gold rates, gold chart, gold update, 2026 gold rates">
-  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Gold_ingot_icon.png/64px-Gold_ingot_icon.png">
-
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
-    header { background: #bfa600; color: white; padding: 20px; text-align: center; }
-    main { padding: 20px; max-width: 800px; margin: auto; }
-    h1 { margin-bottom: 10px; }
-    .price { font-size: 2em; font-weight: bold; color: #bfa600; }
-    canvas { background: white; border-radius: 10px; margin-top: 20px; }
-    footer { text-align: center; padding: 20px; margin-top: 40px; color: #666; font-size: 0.9em; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Gold Prices</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        h1 {
+            color: #FFD700;
+        }
+        .price {
+            font-size: 50px;
+            margin: 30px 0;
+            color: #333;
+        }
+        .update-time {
+            color: #666;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background: #FFD700;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #e6c200;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Live Gold Price Update</h1>
-    <div class="price" id="goldPrice">$0.00</div>
-  </header>
 
-  <main>
-    <h2>Gold Price Trend</h2>
-    <canvas id="goldChart" width="400" height="200"></canvas>
-  </main>
+<h1>Live Gold Price</h1>
+<div class="price" id="gold-price">$0.00</div>
+<div class="update-time" id="update-time">Last updated: --</div>
+<button onclick="updatePrice()">Refresh Price</button>
 
-  <footer>
-    &copy; 2026 Goldupdate. All rights reserved.
-  </footer>
+<script>
+// Function to simulate live gold price
+function updatePrice() {
+    // Random gold price for demo (replace with real API if needed)
+    const price = (1800 + Math.random() * 50).toFixed(2);
+    document.getElementById('gold-price').innerText = '$' + price;
+    document.getElementById('update-time').innerText = 'Last updated: ' + new Date().toLocaleTimeString();
+}
 
-  <script>
-    // Dummy price updater
-    const goldPriceEl = document.getElementById('goldPrice');
+// Auto-update every 10 seconds
+setInterval(updatePrice, 10000);
 
-    function updatePrice() {
-      // Random dummy gold price
-      const price = (1800 + Math.random() * 100).toFixed(2);
-      goldPriceEl.innerText = `$${price}`;
-    }
+// Initial price load
+updatePrice();
+</script>
 
-    setInterval(updatePrice, 2000); // Update every 2 seconds
-    updatePrice();
-
-    // Chart.js gold trend example
-    const ctx = document.getElementById('goldChart').getContext('2d');
-    const goldChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: Array.from({length: 10}, (_, i) => `T-${10-i}`),
-        datasets: [{
-          label: 'Gold Price $',
-          data: Array.from({length: 10}, () => (1800 + Math.random()*100).toFixed(2)),
-          borderColor: '#bfa600',
-          backgroundColor: 'rgba(191,166,0,0.2)',
-          fill: true,
-          tension: 0.3
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: true } },
-        scales: { y: { beginAtZero: false } }
-      }
-    });
-  </script>
 </body>
 </html>
