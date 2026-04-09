@@ -4,106 +4,177 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Physics Calculator | Force, Speed & Energy Calculator</title>
+<title>Live Gold Price Today – USD, PKR, EUR | Gold Chart & Rates</title>
+<meta name="description" content="Check live gold price today in USD, PKR, EUR. View real-time gold charts, 24K rates, and daily market updates.">
+<meta name="keywords" content="gold price today, live gold rate, gold price Pakistan, xauusd, 24k gold price, gold chart">
 
-<meta name="description" content="Free physics calculator for force, speed, and energy formulas. Easy online tool for students.">
+<meta name="google-site-verification" content="w-01iFkAzIGGbxIb2nXDW2TESyJYSEu56oQzlH3SCoY" />
 
 <style>
-body { font-family:Arial; background:#0b0b0b; color:white; text-align:center; margin:0; }
-header { background:linear-gradient(135deg,#00c6ff,#0072ff); padding:30px; }
-.container { max-width:900px; margin:auto; padding:20px; }
+body { margin:0; font-family:Arial; background:#0b0b0b; color:#fff; }
+header { padding:40px; text-align:center; background:linear-gradient(135deg,#c9a227,#f5d76e); color:#000; }
 
-.card { background:#161616; padding:20px; margin:15px 0; border-radius:10px; }
+h1 { margin:0; font-size:30px; }
 
-input { padding:10px; margin:5px; width:120px; border-radius:6px; border:none; }
+.container { max-width:1100px; margin:auto; padding:20px; }
 
-button { padding:10px 15px; margin-top:10px; cursor:pointer; background:#00c6ff; border:none; border-radius:6px; }
+#chart {
+  margin-top:20px;
+  background:#111;
+  padding:15px;
+  border-radius:12px;
+}
 
-.result { margin-top:10px; color:#00ffcc; font-size:18px; }
+.grid {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
+  margin-top:25px;
+}
 
-section { background:#111; padding:20px; margin-top:20px; border-radius:10px; }
-h2 { color:#00c6ff; }
+.card {
+  background:#161616;
+  border:1px solid #c9a227;
+  padding:20px;
+  border-radius:12px;
+  width:180px;
+  text-align:center;
+}
+
+.price { font-size:22px; color:#f5d76e; margin-top:10px; }
+
+section {
+  margin-top:40px;
+  background:#111;
+  padding:20px;
+  border-radius:10px;
+}
+
+h2 { color:#f5d76e; }
+
+footer {
+  text-align:center;
+  padding:20px;
+  border-top:1px solid #333;
+  margin-top:40px;
+  color:#aaa;
+}
 </style>
+
 </head>
 
 <body>
 
 <header>
-<h1>Physics Calculator</h1>
-<p>Force • Speed • Energy Calculator (Free Tool)</p>
+  <h1>Live Gold Price Today</h1>
+  <p>Real-time Gold Rates in USD, PKR, EUR + Live Market Chart</p>
 </header>
 
 <div class="container">
 
-<!-- VISUAL / TOOL -->
-<div class="card">
-<h2>Force Calculator (F = m × a)</h2>
-<input type="number" id="mass" placeholder="Mass (kg)">
-<input type="number" id="acc" placeholder="Acceleration">
-<br>
-<button onclick="calcForce()">Calculate</button>
-<div class="result" id="forceResult"></div>
-</div>
-
-<div class="card">
-<h2>Speed Calculator (v = d / t)</h2>
-<input type="number" id="dist" placeholder="Distance (m)">
-<input type="number" id="time" placeholder="Time (s)">
-<br>
-<button onclick="calcSpeed()">Calculate</button>
-<div class="result" id="speedResult"></div>
-</div>
-
-<div class="card">
-<h2>Energy Calculator (E = mgh)</h2>
-<input type="number" id="emass" placeholder="Mass (kg)">
-<input type="number" id="height" placeholder="Height (m)">
-<br>
-<button onclick="calcEnergy()">Calculate</button>
-<div class="result" id="energyResult"></div>
-</div>
-
-<!-- CONTENT -->
+<!-- 1️⃣ CHART (VISUAL TOP) -->
 <section>
-<h2>About Physics Calculator</h2>
+<h2>Live Gold Chart (XAU/USD)</h2>
+<div id="chart">
+  <div id="tradingview_chart"></div>
+</div>
+</section>
+
+<!-- 2️⃣ LIVE PRICES -->
+<div class="grid" id="grid">Loading live prices...</div>
+
+<!-- 3️⃣ MARKET INSIGHT -->
+<section>
+<h2>Market Insight</h2>
 <p>
-This tool helps students calculate physics formulas like force, speed, and energy easily using standard equations.
+Gold price changes daily due to global demand, USD value, inflation, and financial markets.
+This page provides live updates for 24K gold price, per ounce gold rate, and gold price in Pakistan.
 </p>
 </section>
 
-<!-- FAQ -->
+<!-- 4️⃣ CONVERTER INFO (optional placeholder) -->
 <section>
-<h2>FAQ</h2>
+<h2>Gold Price Information</h2>
+<p>
+You can track live gold rates in USD, PKR, and EUR. Prices are updated automatically based on global market data.
+</p>
+</section>
 
-<p><strong>What is force formula?</strong><br>F = m × a</p>
+<!-- 5️⃣ FAQ -->
+<section>
+<h2>FAQ – Gold Price</h2>
 
-<p><strong>What is speed formula?</strong><br>v = distance / time</p>
+<p><strong>What is gold price today?</strong><br>
+Gold price is the current market value of gold per ounce or gram.</p>
 
-<p><strong>What is energy formula?</strong><br>E = m × g × h</p>
+<p><strong>Why does gold price change?</strong><br>
+It changes due to USD rate, global demand, and economic conditions.</p>
+
+<p><strong>What is 24K gold?</strong><br>
+24K gold is pure gold with 99.9% purity.</p>
 
 </section>
 
 </div>
 
+<footer>© 2026 Gold Price Update – All Rights Reserved</footer>
+
+<!-- TradingView -->
+<script src="https://s3.tradingview.com/tv.js"></script>
+
 <script>
-function calcForce(){
-let m = document.getElementById('mass').value;
-let a = document.getElementById('acc').value;
-document.getElementById('forceResult').innerText = "Force = " + (m*a) + " N";
+const currencies = [
+  {code:'USD', symbol:'$', rate:1},
+  {code:'PKR', symbol:'Rs', rate:278},
+  {code:'EUR', symbol:'€', rate:0.92}
+];
+
+let goldPrice = 3200;
+
+async function loadGold(){
+  try {
+    let res = await fetch("https://api.metals.live/v1/spot/gold");
+    let data = await res.json();
+    if(data && data[0] && data[0].gold){
+      goldPrice = data[0].gold;
+    }
+  } catch(e) {}
+  render();
 }
 
-function calcSpeed(){
-let d = document.getElementById('dist').value;
-let t = document.getElementById('time').value;
-document.getElementById('speedResult').innerText = "Speed = " + (d/t) + " m/s";
+function render(){
+  let html = '';
+  currencies.forEach(c=>{
+    let price = goldPrice * c.rate;
+    html += `
+      <div class="card">
+        <div>${c.code} / oz</div>
+        <div class="price">${c.symbol}${price.toFixed(2)}</div>
+      </div>
+    `;
+  });
+  document.getElementById("grid").innerHTML = html;
 }
 
-function calcEnergy(){
-let m = document.getElementById('emass').value;
-let h = document.getElementById('height').value;
-let g = 9.8;
-document.getElementById('energyResult').innerText = "Energy = " + (m*g*h) + " J";
+function loadChart(){
+  if(typeof TradingView !== "undefined"){
+    new TradingView.widget({
+      symbol: "OANDA:XAUUSD",
+      interval: "D",
+      container_id: "tradingview_chart",
+      width: "100%",
+      height: 400,
+      theme: "dark"
+    });
+  }
 }
+
+window.onload = function(){
+  loadGold();
+  loadChart();
+  setInterval(loadGold, 60000);
+};
 </script>
 
 </body>
