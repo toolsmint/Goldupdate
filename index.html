@@ -4,172 +4,133 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Google Search Console Verification (DON'T TOUCH) -->
+<!-- SEO -->
+<title>Live Gold Price Today – USD, PKR, EUR | 24K Gold Rates & Chart</title>
+<meta name="description" content="Check live gold price today in USD, PKR, EUR. Get updated 24K gold rates, per ounce & gram prices with live charts and market updates.">
+<meta name="keywords" content="gold price today, live gold price, gold rate Pakistan, 24k gold price, xauusd, gold chart, gold ounce price">
+
 <meta name="google-site-verification" content="w-01iFkAzIGGbxIb2nXDW2TESyJYSEu56oQzlH3SCoY" />
 
-<title>Live Gold Price Today (Global) – USD, PKR, EUR + Calculator</title>
-
-<meta name="description" content="Live gold price today worldwide. Check gold rates in USD, PKR, EUR with calculator and live chart.">
+<!-- Open Graph -->
+<meta property="og:title" content="Live Gold Price Today">
+<meta property="og:description" content="Live gold rates in USD, PKR, EUR with charts and updates.">
+<meta property="og:type" content="website">
 
 <style>
-body { margin:0; font-family:Arial; background:#0d0d0d; color:white; text-align:center; }
+body { margin:0; font-family:Arial; background:#0b0b0b; color:white; }
+header { background:linear-gradient(135deg,#c9a227,#f5d76e); color:#000; padding:35px; text-align:center; }
+h1 { margin:0; font-size:28px; }
+.container { max-width:1100px; margin:auto; padding:20px; }
 
-header {
-  background:linear-gradient(135deg,#bfa43f,#f7d976);
-  color:#000;
-  padding:30px;
-}
-
-.grid {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
-  padding:30px;
-}
+.grid { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; margin-top:20px; }
 
 .card {
   background:#161616;
-  border:1px solid gold;
+  border:1px solid #c9a227;
   padding:20px;
   border-radius:12px;
   width:180px;
+  text-align:center;
 }
 
-.price { font-size:22px; color:gold; }
+.price { font-size:22px; color:#f5d76e; margin-top:10px; }
 
-.section {
-  background:#111;
-  margin:20px auto;
-  padding:20px;
-  width:90%;
-  max-width:900px;
-  border-radius:10px;
-}
+section { margin-top:40px; padding:20px; background:#111; border-radius:10px; }
 
-input, select {
-  padding:10px;
-  margin:5px;
-  border-radius:5px;
-  border:none;
-}
+h2 { color:#f5d76e; }
 
-button {
-  padding:10px 20px;
-  background:gold;
-  border:none;
-  cursor:pointer;
-  font-weight:bold;
-}
+footer { text-align:center; padding:20px; border-top:1px solid #333; color:#aaa; margin-top:40px; }
 
-#result { margin-top:10px; color:gold; }
+#chart { margin-top:30px; }
 
-footer { padding:20px; color:#aaa; border-top:1px solid gold; }
 </style>
+
 </head>
 
 <body>
 
 <header>
-<h1>🌍 Live Gold Price Today</h1>
-<p>Global gold rates in USD, PKR, EUR + Calculator</p>
-<p><strong>Last Updated:</strong> April 2026</p>
+  <h1>Live Gold Price Today</h1>
+  <p>Updated Gold Rates in USD, PKR, EUR – 24K Gold Price & Live Charts</p>
 </header>
 
-<!-- PRICE -->
-<div class="grid" id="grid">Loading...</div>
+<div class="container">
 
-<!-- CALCULATOR -->
-<div class="section">
-<h2>Gold Calculator</h2>
+<!-- PRICES -->
+<div class="grid" id="grid">Loading live prices...</div>
 
-<input type="number" id="amount" placeholder="Enter value">
+<!-- CONTENT SEO -->
+<section>
+<h2>About Gold Prices</h2>
+<p>
+Gold price changes daily based on global demand, USD value, inflation, and market conditions.
+This page provides live updates for <strong>24K gold price, per ounce gold rate, and gold price in Pakistan (PKR)</strong>.
+</p>
+</section>
 
-<select id="unit">
-  <option value="gram">Gram</option>
-  <option value="tola">Tola</option>
-</select>
+<!-- FAQ -->
+<section>
+<h2>FAQ – Gold Price</h2>
 
-<select id="currency">
-  <option value="USD">USD</option>
-  <option value="PKR">PKR</option>
-  <option value="EUR">EUR</option>
-</select>
+<p><strong>What is gold price today?</strong><br>
+Gold price is the current market value of gold per ounce or gram.</p>
 
-<br>
-<button onclick="calculate()">Calculate</button>
+<p><strong>Why does gold price change?</strong><br>
+It changes due to USD rate, global demand, and economic conditions.</p>
 
-<div id="result"></div>
-</div>
+<p><strong>What is 24K gold?</strong><br>
+24K is pure gold with 99.9% purity.</p>
+</section>
 
 <!-- CHART -->
-<div class="section">
-<div id="tradingview_chart"></div>
+<section>
+<h2>Live Gold Chart (XAU/USD)</h2>
+<div id="chart">
+  <div id="tradingview_chart"></div>
+</div>
+</section>
+
 </div>
 
-<footer>© 2026 GoldWatch</footer>
+<footer>© 2026 Gold Price Update – All Rights Reserved</footer>
 
+<!-- TradingView -->
 <script src="https://s3.tradingview.com/tv.js"></script>
 
 <script>
-const rates = {
-  USD:1,
-  PKR:278,
-  EUR:0.92
-};
+const currencies = [
+  {code:'USD', symbol:'$', rate:1},
+  {code:'PKR', symbol:'Rs', rate:278},
+  {code:'EUR', symbol:'€', rate:0.92}
+];
 
 let goldPrice = 3200;
 
-// ✅ FIXED API
-async function loadGold(){
-  try{
+async function loadGold() {
+  try {
     let res = await fetch("https://api.metals.live/v1/spot/gold");
     let data = await res.json();
-
-    if(Array.isArray(data) && data.length > 0){
-      goldPrice = data[0][1];
+    if(data && data[0] && data[0].gold){
+      goldPrice = data[0].gold;
     }
-
-  }catch(e){
-    console.log("API error, fallback active");
-    goldPrice = 3200;
-  }
+  } catch(e) {}
   render();
 }
 
-// RENDER
 function render(){
-  let html='';
-  for(let cur in rates){
-    let price = goldPrice * rates[cur];
+  let html = '';
+  currencies.forEach(c=>{
+    let price = goldPrice * c.rate;
     html += `
-    <div class="card">
-      <div>${cur}</div>
-      <div class="price">${price.toFixed(2)}</div>
-    </div>`;
-  }
+      <div class="card">
+        <div>${c.code} / oz</div>
+        <div class="price">${c.symbol}${price.toFixed(2)}</div>
+      </div>
+    `;
+  });
   document.getElementById("grid").innerHTML = html;
 }
 
-// CALCULATOR
-function calculate(){
-  let amt = document.getElementById("amount").value;
-  let unit = document.getElementById("unit").value;
-  let cur = document.getElementById("currency").value;
-
-  let gramPrice = goldPrice / 31.1;
-  let value = 0;
-
-  if(unit === "gram") value = amt * gramPrice;
-  if(unit === "tola") value = amt * (gramPrice * 11.66);
-
-  value = value * rates[cur];
-
-  document.getElementById("result").innerText =
-    "Value: " + value.toFixed(2) + " " + cur;
-}
-
-// CHART
 function loadChart(){
   if(typeof TradingView !== "undefined"){
     new TradingView.widget({
@@ -186,7 +147,7 @@ function loadChart(){
 window.onload = function(){
   loadGold();
   loadChart();
-  setInterval(loadGold,60000);
+  setInterval(loadGold, 60000);
 };
 </script>
 
