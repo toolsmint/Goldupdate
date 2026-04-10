@@ -4,49 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gold Calculator + Live Gold Price Today | USD, PKR, EUR</title>
+<title><div class="card">
+<h2>Gold Calculator (24K / 22K / 18K)</h2>
 
-<meta name="description" content="Calculate gold price per gram or tola and check live gold rates in USD, PKR, EUR with real-time chart.">
-<meta name="keywords" content="gold calculator, gold price today, 24k gold rate, xauusd, gold price Pakistan">
+<input type="number" id="weight" placeholder="Enter Weight">
 
-<style>
-body { margin:0; font-family:Arial; background:#0b0b0b; color:#fff; }
+<select id="unit">
+  <option value="gram">Gram</option>
+  <option value="tola">Tola</option>
+</select>
 
-header {
-  text-align:center;
-  padding:30px;
-  background:linear-gradient(135deg,#c9a227,#f5d76e);
-  color:#000;
+<select id="karat">
+  <option value="1">24K (Pure)</option>
+  <option value="0.916">22K</option>
+  <option value="0.75">18K</option>
+</select>
+
+<br>
+
+<button onclick="calculateGold()">Calculate</button>
+
+<div class="result" id="result"></div>
+</div>
+
+<script>
+let goldPriceUSD = 3200;   // per ounce approx fallback
+let usdToPkr = 278;
+
+// 1 ounce = 31.1035 grams
+let pricePerGramUSD = goldPriceUSD / 31.1035;
+
+function calculateGold(){
+
+let weight = parseFloat(document.getElementById("weight").value);
+let unit = document.getElementById("unit").value;
+let karat = parseFloat(document.getElementById("karat").value);
+
+if(!weight){
+document.getElementById("result").innerHTML = "❌ Please enter weight";
+return;
 }
 
-.container { max-width:1100px; margin:auto; padding:20px; }
-
-.card {
-  background:#161616;
-  padding:20px;
-  border-radius:10px;
-  margin-top:20px;
-  border:1px solid #c9a227;
+// conversion to grams
+if(unit === "tola"){
+weight = weight * 11.66;
 }
 
-input, select {
-  padding:10px;
-  margin:5px;
-  width:120px;
-}
+// base price
+let goldValueUSD = weight * pricePerGramUSD * karat;
+let goldValuePKR = goldValueUSD * usdToPkr;
 
-button {
-  padding:10px 15px;
-  background:#f5d76e;
-  border:none;
-  cursor:pointer;
-  font-weight:bold;
-}
+// output
+document.getElementById("result").innerHTML = `
+✔ USD Value: $${goldValueUSD.toFixed(2)} <br>
+✔ PKR Value: Rs ${goldValuePKR.toFixed(2)} <br>
+✔ Weight in Gram: ${weight.toFixed(2)}
+`;
 
-.result {
-  margin-top:10px;
-  color:#00ff99;
-  font-size:18px;
+}
+</script>
 }
 
 #chart {
