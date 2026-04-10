@@ -233,65 +233,11 @@ This platform is designed to provide accurate, fast, and simple gold price infor
 
 <!-- 📌 EXTRA SEO POINTS -->
 <div class="card">
-<h2>Gold Price in Pakistan Today</h2>
-<p>Live gold rate in Pakistan changes based on USD exchange rate.</p>
+<h2>Gold Price in Pakistan Today Per Tola</h2>
+<p>Latest gold rate per tola in Pakistan updated based on international gold market and USD exchange rate.</p>
 
-<h2>24K Gold Rate per Gram</h2>
-<p>24K gold is pure and highest value form.</p>
+<h2>24K Gold Rate Today Pakistan</h2>
+<p>24K gold rate today reflects the pure gold price with highest market value.</p>
 
-<h2>Gold Price per Tola</h2>
-<p>1 tola = 11.66 grams approximately.</p>
-</div>
-
-</div>
-
-<footer style="text-align:center;padding:20px;color:#aaa;">
-© 2026 Gold Price Tools
-</footer>
-
-<!-- TRADINGVIEW -->
-<script src="https://s3.tradingview.com/tv.js"></script>
-
-<script>
-let goldPrice = 3200;
-let usdToPkr = 278;
-
-function calculate(){
-
-let weight = parseFloat(document.getElementById("weight").value);
-let unit = document.getElementById("unit").value;
-let karat = parseFloat(document.getElementById("karat").value);
-
-if(!weight){
-document.getElementById("result").innerText="Enter weight";
-return;
-}
-
-if(unit==="tola") weight = weight*11.66;
-
-let priceUSD = weight * goldPrice * karat;
-let pricePKR = priceUSD * usdToPkr;
-
-document.getElementById("result").innerHTML =
-"USD: $" + priceUSD.toFixed(2) + "<br>PKR: Rs " + pricePKR.toFixed(2);
-}
-
-function loadChart(){
-new TradingView.widget({
-symbol:"OANDA:XAUUSD",
-interval:"D",
-container_id:"tradingview_chart",
-width:"100%",
-height:350,
-theme:"dark"
-});
-}
-
-window.onload = function(){
-loadChart();
-};
-</script>
-
-</body>
-</html>
-<div class="card">
+<h2>Gold Price Per Gram in PKR</h2>
+<p>Gold price per gram in Pakistan changes daily depending on USD to PKR rate and global gold demand.</p>
