@@ -4,101 +4,59 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Live Gold Price Today – USD, PKR, EUR | 24K Gold Rates & Real-Time Chart</title>
+<title>Gold Calculator + Live Gold Price Today | USD, PKR, EUR</title>
 
-<meta name="description" content="Live gold price today in USD, PKR, EUR. Get real-time 24K gold rates, per ounce & gram prices, and live gold charts updated every minute.">
-<meta name="keywords" content="gold price today, live gold rate, gold price Pakistan, 24k gold price, xauusd, gold chart, gold rate live">
-
-<link rel="canonical" href="https://toolsmint.github.io/Goldupdate/">
-<meta name="robots" content="index, follow">
-
-<meta name="google-site-verification" content="w-01iFkAzIGGbxIb2nXDW2TESyJYSEu56oQzlH3SCoY" />
-
-<!-- OPEN GRAPH -->
-<meta property="og:title" content="Live Gold Price Today">
-<meta property="og:description" content="Real-time gold rates in USD, PKR, EUR with live chart updates.">
-<meta property="og:type" content="website">
-
-<!-- WEBSITE SCHEMA -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Gold Price Live Tracker",
-  "url": "https://toolsmint.github.io/Goldupdate/"
-}
-</script>
+<meta name="description" content="Calculate gold price per gram or tola and check live gold rates in USD, PKR, EUR with real-time chart.">
+<meta name="keywords" content="gold calculator, gold price today, 24k gold rate, xauusd, gold price Pakistan">
 
 <style>
 body { margin:0; font-family:Arial; background:#0b0b0b; color:#fff; }
 
 header {
-  padding:40px;
   text-align:center;
+  padding:30px;
   background:linear-gradient(135deg,#c9a227,#f5d76e);
   color:#000;
 }
 
-h1 { margin:0; font-size:32px; }
-
-.badge {
-  margin-top:10px;
-  display:inline-block;
-  padding:5px 12px;
-  background:#000;
-  color:#f5d76e;
-  border-radius:20px;
-  font-size:12px;
-}
-
 .container { max-width:1100px; margin:auto; padding:20px; }
-
-.small { font-size:12px; color:#ccc; margin-top:5px; }
-
-#chart {
-  margin-top:20px;
-  background:#111;
-  padding:15px;
-  border-radius:12px;
-}
-
-.grid {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:15px;
-  margin-top:25px;
-}
 
 .card {
   background:#161616;
-  border:1px solid #c9a227;
   padding:20px;
-  border-radius:12px;
-  width:180px;
-  text-align:center;
+  border-radius:10px;
+  margin-top:20px;
+  border:1px solid #c9a227;
 }
 
-.price { font-size:22px; color:#f5d76e; margin-top:10px; }
+input, select {
+  padding:10px;
+  margin:5px;
+  width:120px;
+}
 
-section {
-  margin-top:40px;
+button {
+  padding:10px 15px;
+  background:#f5d76e;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.result {
+  margin-top:10px;
+  color:#00ff99;
+  font-size:18px;
+}
+
+#chart {
+  margin-top:30px;
   background:#111;
-  padding:20px;
+  padding:15px;
   border-radius:10px;
 }
 
 h2 { color:#f5d76e; }
-
-h3 { color:#ccc; }
-
-footer {
-  text-align:center;
-  padding:20px;
-  border-top:1px solid #333;
-  margin-top:40px;
-  color:#aaa;
-}
 </style>
 
 </head>
@@ -106,142 +64,65 @@ footer {
 <body>
 
 <header>
-  <h1>Live Gold Price Today</h1>
-  <div class="badge">REAL-TIME GLOBAL MARKET</div>
-  <p>USD, PKR, EUR Live Gold Rates + Chart Updates</p>
-  <div class="small">Last Updated: <span id="time"></span></div>
+<h1>Gold Calculator + Live Price</h1>
+<p>Calculate Gold Price & View Live Market Chart</p>
 </header>
 
 <div class="container">
 
-<!-- 1️⃣ CHART (IMPORTANT FOR UX) -->
-<section>
+<!-- 🔥 CALCULATOR (TOP) -->
+<div class="card">
+<h2>Gold Calculator</h2>
+
+<input type="number" id="weight" placeholder="Weight">
+<select id="unit">
+  <option value="gram">Gram</option>
+  <option value="tola">Tola</option>
+</select>
+
+<select id="karat">
+  <option value="1">24K</option>
+  <option value="0.916">22K</option>
+  <option value="0.75">18K</option>
+</select>
+
+<br>
+
+<button onclick="calculate()">Calculate</button>
+
+<div class="result" id="result"></div>
+</div>
+
+<!-- 📊 CHART (CALCULATOR KE NEECHE) -->
+<div class="card">
 <h2>Live Gold Chart (XAU/USD)</h2>
 <div id="chart">
   <div id="tradingview_chart"></div>
 </div>
-</section>
+</div>
 
-<!-- 2️⃣ LIVE DATA -->
-<div class="grid" id="grid">Loading live gold prices...</div>
-
-<!-- 3️⃣ SEO CONTENT (LONG FORM - IMPORTANT FOR RANKING) -->
-<section>
-<h2>What is Gold Price Today?</h2>
+<!-- SEO CONTENT -->
+<div class="card">
+<h2>About Gold Price</h2>
 <p>
-Gold price refers to the current global market value of gold traded in financial markets.
-It changes every second based on USD strength, inflation, interest rates, and global demand.
-Investors use gold as a safe-haven asset during economic uncertainty and inflation.
+Gold price changes daily due to global demand, USD strength, inflation, and market conditions.
+Investors use gold as a safe asset. This page provides live gold rates and calculator for accurate value estimation.
 </p>
-
-<h3>Why Gold Price Changes?</h3>
-<p>
-Gold prices are influenced by international currency exchange rates, central bank policies, and global economic conditions.
-When the US dollar becomes strong, gold prices in other currencies like PKR and EUR often increase.
-</p>
-
-<h3>Gold Market Importance</h3>
-<p>
-Gold is one of the most valuable precious metals in the world and is widely used in investment, jewelry, and industrial sectors.
-</p>
-</section>
-
-<!-- 4️⃣ FAQ -->
-<section>
-<h2>FAQ – Gold Price</h2>
-
-<p><strong>What is 24K gold?</strong><br>
-24K gold is the purest form of gold with 99.9% purity.</p>
-
-<p><strong>Why does gold price change daily?</strong><br>
-Due to USD value, inflation, global demand, and financial markets.</p>
-
-<p><strong>Is gold price same worldwide?</strong><br>
-No, it varies depending on currency and country.</p>
-
-</section>
+</div>
 
 </div>
 
-<footer>
-© 2026 Gold Price Live Tracker | Powered by Real-Time Market Data
+<footer style="text-align:center;padding:20px;color:#aaa;">
+© 2026 Gold Tools
 </footer>
 
-<!-- SCHEMA (FAQ BOOST) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is 24K gold?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "24K gold is the purest form of gold with 99.9% purity."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Why does gold price change daily?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Gold price changes due to USD value, inflation, global demand, and financial markets."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is gold price same worldwide?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No, gold price varies depending on currency and country."
-      }
-    }
-  ]
-}
-</script>
-
-<!-- SCRIPT -->
+<!-- TRADINGVIEW -->
 <script src="https://s3.tradingview.com/tv.js"></script>
 
 <script>
-const currencies = [
-  {code:'USD', symbol:'$', rate:1},
-  {code:'PKR', symbol:'Rs', rate:278},
-  {code:'EUR', symbol:'€', rate:0.92}
-];
-
 let goldPrice = 3200;
 
-function updateTime(){
-  document.getElementById("time").innerText = new Date().toLocaleString();
-}
-
-async function loadGold(){
-  try {
-    let res = await fetch("https://api.metals.live/v1/spot/gold");
-    let data = await res.json();
-    if(data && data[0] && data[0].gold){
-      goldPrice = data[0].gold;
-    }
-  } catch(e) {}
-  render();
-}
-
-function render(){
-  let html = '';
-  currencies.forEach(c=>{
-    let price = goldPrice * c.rate;
-    html += `
-      <div class="card">
-        <div>${c.code} / oz</div>
-        <div class="price">${c.symbol}${price.toFixed(2)}</div>
-      </div>
-    `;
-  });
-  document.getElementById("grid").innerHTML = html;
-}
-
+// live chart
 function loadChart(){
   if(typeof TradingView !== "undefined"){
     new TradingView.widget({
@@ -249,18 +130,41 @@ function loadChart(){
       interval: "D",
       container_id: "tradingview_chart",
       width: "100%",
-      height: 400,
+      height: 350,
       theme: "dark"
     });
   }
 }
 
+// calculator
+function calculate(){
+  let weight = parseFloat(document.getElementById("weight").value);
+  let unit = document.getElementById("unit").value;
+  let karat = parseFloat(document.getElementById("karat").value);
+
+  if(!weight){
+    document.getElementById("result").innerText = "Enter weight";
+    return;
+  }
+
+  let base = goldPrice;
+
+  // conversion
+  if(unit === "gram"){
+    weight = weight;
+  } else {
+    weight = weight * 11.66; // 1 tola approx
+  }
+
+  let price = weight * base * karat;
+
+  document.getElementById("result").innerText =
+    "Estimated Value: $" + price.toFixed(2);
+}
+
+// init
 window.onload = function(){
-  updateTime();
-  loadGold();
   loadChart();
-  setInterval(loadGold, 60000);
-  setInterval(updateTime, 1000);
 };
 </script>
 
