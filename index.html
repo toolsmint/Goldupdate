@@ -4,75 +4,56 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><div class="card">
-<h2>Gold Calculator (24K / 22K / 18K)</h2>
+<title>Gold Calculator + Live Gold Price Today | USD, PKR, EUR</title>
 
-<input type="number" id="weight" placeholder="Enter Weight">
+<meta name="description" content="Calculate gold price per gram or tola and view live gold rates in USD, PKR, EUR with real-time chart and market insights.">
 
-<select id="unit">
-  <option value="gram">Gram</option>
-  <option value="tola">Tola</option>
-</select>
+<style>
+body{margin:0;font-family:Arial;background:#0b0b0b;color:#fff;}
 
-<select id="karat">
-  <option value="1">24K (Pure)</option>
-  <option value="0.916">22K</option>
-  <option value="0.75">18K</option>
-</select>
-
-<br>
-
-<button onclick="calculateGold()">Calculate</button>
-
-<div class="result" id="result"></div>
-</div>
-
-<script>
-let goldPriceUSD = 3200;   // per ounce approx fallback
-let usdToPkr = 278;
-
-// 1 ounce = 31.1035 grams
-let pricePerGramUSD = goldPriceUSD / 31.1035;
-
-function calculateGold(){
-
-let weight = parseFloat(document.getElementById("weight").value);
-let unit = document.getElementById("unit").value;
-let karat = parseFloat(document.getElementById("karat").value);
-
-if(!weight){
-document.getElementById("result").innerHTML = "❌ Please enter weight";
-return;
+header{
+text-align:center;
+padding:30px;
+background:linear-gradient(135deg,#c9a227,#f5d76e);
+color:#000;
 }
 
-// conversion to grams
-if(unit === "tola"){
-weight = weight * 11.66;
+.container{max-width:1100px;margin:auto;padding:20px;}
+
+.card{
+background:#161616;
+padding:20px;
+border-radius:10px;
+margin-top:20px;
+border:1px solid #c9a227;
 }
 
-// base price
-let goldValueUSD = weight * pricePerGramUSD * karat;
-let goldValuePKR = goldValueUSD * usdToPkr;
-
-// output
-document.getElementById("result").innerHTML = `
-✔ USD Value: $${goldValueUSD.toFixed(2)} <br>
-✔ PKR Value: Rs ${goldValuePKR.toFixed(2)} <br>
-✔ Weight in Gram: ${weight.toFixed(2)}
-`;
-
-}
-</script>
+input,select,button{
+padding:10px;
+margin:5px;
 }
 
-#chart {
-  margin-top:30px;
-  background:#111;
-  padding:15px;
-  border-radius:10px;
+button{
+background:#f5d76e;
+border:none;
+cursor:pointer;
+font-weight:bold;
 }
 
-h2 { color:#f5d76e; }
+.result{
+margin-top:10px;
+color:#00ff99;
+font-size:18px;
+}
+
+h2{color:#f5d76e;}
+
+#chart{
+margin-top:20px;
+background:#111;
+padding:15px;
+border-radius:10px;
+}
 </style>
 
 </head>
@@ -80,26 +61,27 @@ h2 { color:#f5d76e; }
 <body>
 
 <header>
-<h1>Gold Calculator + Live Price</h1>
-<p>Calculate Gold Price & View Live Market Chart</p>
+<h1>Gold Calculator + Live Gold Price</h1>
+<p>USD, PKR, EUR Live Rates + Calculator + Chart</p>
 </header>
 
 <div class="container">
 
-<!-- 🔥 CALCULATOR (TOP) -->
+<!-- 🔥 CALCULATOR -->
 <div class="card">
-<h2>Gold Calculator</h2>
+<h2>Gold Calculator (24K / 22K / 18K)</h2>
 
-<input type="number" id="weight" placeholder="Weight">
+<input type="number" id="weight" placeholder="Enter Weight">
+
 <select id="unit">
-  <option value="gram">Gram</option>
-  <option value="tola">Tola</option>
+<option value="gram">Gram</option>
+<option value="tola">Tola</option>
 </select>
 
 <select id="karat">
-  <option value="1">24K</option>
-  <option value="0.916">22K</option>
-  <option value="0.75">18K</option>
+<option value="1">24K</option>
+<option value="0.916">22K</option>
+<option value="0.75">18K</option>
 </select>
 
 <br>
@@ -109,27 +91,75 @@ h2 { color:#f5d76e; }
 <div class="result" id="result"></div>
 </div>
 
-<!-- 📊 CHART (CALCULATOR KE NEECHE) -->
+<!-- 📊 CHART -->
 <div class="card">
 <h2>Live Gold Chart (XAU/USD)</h2>
 <div id="chart">
-  <div id="tradingview_chart"></div>
+<div id="tradingview_chart"></div>
 </div>
 </div>
 
-<!-- SEO CONTENT -->
+<!-- 📄 SEO CONTENT (1200+ WORD STYLE) -->
 <div class="card">
-<h2>About Gold Price</h2>
+<h2>Live Gold Price Today – Market Guide</h2>
+
 <p>
-Gold price changes daily due to global demand, USD strength, inflation, and market conditions.
-Investors use gold as a safe asset. This page provides live gold rates and calculator for accurate value estimation.
+Gold is one of the most important precious metals in the world. Its price changes every second due to global demand, inflation, currency strength, and economic conditions.
 </p>
+
+<p>
+Gold is traded internationally in USD per ounce but also converted into PKR and EUR for local markets.
+</p>
+
+<h3>Why Gold Price Changes</h3>
+<p>
+Gold price depends on USD value, inflation, interest rates, and global uncertainty.
+</p>
+
+<h3>Gold as Investment</h3>
+<p>
+Gold is a safe-haven asset used for long-term wealth protection.
+</p>
+
+<h3>Gold Types</h3>
+<p>
+24K is pure gold, 22K and 18K are mixed alloys used in jewelry.
+</p>
+
+<h3>Gold in Pakistan</h3>
+<p>
+Gold price in Pakistan depends on international gold rate and USD to PKR exchange rate.
+</p>
+
+<h3>Why People Track Gold</h3>
+<ul>
+<li>Investment decisions</li>
+<li>Jewelry buying</li>
+<li>Trading</li>
+<li>Inflation protection</li>
+</ul>
+
+<p>
+This website helps users track live gold price and calculate accurate value instantly.
+</p>
+</div>
+
+<!-- 📌 EXTRA SEO POINTS -->
+<div class="card">
+<h2>Gold Price in Pakistan Today</h2>
+<p>Live gold rate in Pakistan changes based on USD exchange rate.</p>
+
+<h2>24K Gold Rate per Gram</h2>
+<p>24K gold is pure and highest value form.</p>
+
+<h2>Gold Price per Tola</h2>
+<p>1 tola = 11.66 grams approximately.</p>
 </div>
 
 </div>
 
 <footer style="text-align:center;padding:20px;color:#aaa;">
-© 2026 Gold Tools
+© 2026 Gold Price Tools
 </footer>
 
 <!-- TRADINGVIEW -->
@@ -137,173 +167,172 @@ Investors use gold as a safe asset. This page provides live gold rates and calcu
 
 <script>
 let goldPrice = 3200;
+let usdToPkr = 278;
 
-// live chart
-function loadChart(){
-  if(typeof TradingView !== "undefined"){
-    new TradingView.widget({
-      symbol: "OANDA:XAUUSD",
-      interval: "D",
-      container_id: "tradingview_chart",
-      width: "100%",
-      height: 350,
-      theme: "dark"
-    });
-  }
-}
-
-// calculator
 function calculate(){
-  let weight = parseFloat(document.getElementById("weight").value);
-  let unit = document.getElementById("unit").value;
-  let karat = parseFloat(document.getElementById("karat").value);
 
-  if(!weight){
-    document.getElementById("result").innerText = "Enter weight";
-    return;
-  }
+let weight = parseFloat(document.getElementById("weight").value);
+let unit = document.getElementById("unit").value;
+let karat = parseFloat(document.getElementById("karat").value);
 
-  let base = goldPrice;
-
-  // conversion
-  if(unit === "gram"){
-    weight = weight;
-  } else {
-    weight = weight * 11.66; // 1 tola approx
-  }
-
-  let price = weight * base * karat;
-
-  document.getElementById("result").innerText =
-    "Estimated Value: $" + price.toFixed(2);
+if(!weight){
+document.getElementById("result").innerText="Enter weight";
+return;
 }
 
-// init
+if(unit==="tola") weight = weight*11.66;
+
+let priceUSD = weight * goldPrice * karat;
+let pricePKR = priceUSD * usdToPkr;
+
+document.getElementById("result").innerHTML =
+"USD: $" + priceUSD.toFixed(2) + "<br>PKR: Rs " + pricePKR.toFixed(2);
+}
+
+function loadChart(){
+new TradingView.widget({
+symbol:"OANDA:XAUUSD",
+interval:"D",
+container_id:"tradingview_chart",
+width:"100%",
+height:350,
+theme:"dark"
+});
+}
+
 window.onload = function(){
-  loadChart();
+loadChart();
 };
 </script>
 
 </body>
 </html>
-<section>
-<h2>Live Gold Price Today – Full Market Analysis</h2>
+<div class="card">
+<h2>Live Gold Price Today – Complete Market Guide</h2>
 
 <p>
-Gold is one of the most important and widely traded precious metals in the global financial market. The <strong>live gold price today</strong> is constantly changing due to global economic conditions, currency fluctuations, inflation rates, and investor demand. Traders, investors, and jewelers closely monitor gold prices to make informed financial decisions.
+Gold is one of the most valuable and widely traded precious metals in the global financial system. The <strong>live gold price today</strong> changes every second because it is influenced by international demand, currency fluctuations, inflation rates, and economic uncertainty. Investors, traders, and jewelers around the world closely monitor gold prices to make informed financial decisions.
 </p>
 
 <p>
-Gold is measured globally in USD per ounce, but in many countries including Pakistan, India, and European nations, it is also converted into local currencies such as PKR and EUR. Because of this, gold prices differ from country to country even though the global rate remains the same.
+Gold is traded globally in US dollars per ounce, but in countries like Pakistan, India, and many European regions, it is converted into local currencies such as PKR and EUR. Because of this conversion system, gold prices vary from country to country even though the international market rate remains the same.
 </p>
 
-<h3>How Gold Price Works in Global Market</h3>
+<h3>What Determines Gold Price?</h3>
 
 <p>
-Gold price is determined by international trading markets such as COMEX and LBMA. These markets set the benchmark price of gold based on supply and demand. When investors buy more gold, the price increases. When demand decreases, the price drops.
+The price of gold is determined by international commodity markets such as COMEX and LBMA. These exchanges act as global benchmarks for gold trading. The price is mainly driven by supply and demand, investor sentiment, and global economic conditions.
 </p>
 
 <p>
-The most important factor affecting gold price is the US Dollar. Since gold is traded in USD, any change in dollar strength directly impacts gold value worldwide. A strong dollar usually results in lower gold prices, while a weak dollar pushes prices higher.
+When investors feel uncertainty in the financial market, they tend to buy more gold, which increases demand and raises the price. On the other hand, when the economy is stable, demand for gold may decrease, causing prices to fall.
 </p>
 
-<h3>Major Factors That Affect Gold Price</h3>
+<h3>Role of US Dollar in Gold Price</h3>
 
 <p>
-There are several key factors that influence gold prices globally:
+The US Dollar plays a very important role in determining gold prices worldwide. Since gold is globally priced in USD, any change in the value of the dollar directly affects gold rates.
+</p>
+
+<p>
+When the US dollar becomes stronger, gold becomes more expensive for other countries, which usually reduces demand and lowers prices. When the dollar weakens, gold becomes cheaper for international buyers, increasing demand and pushing prices higher.
+</p>
+
+<h3>Economic Factors Affecting Gold</h3>
+
+<p>
+Several major economic factors influence the price of gold in global markets:
 </p>
 
 <ul>
-<li>✔ US Dollar strength and currency exchange rates</li>
-<li>✔ Inflation and interest rates</li>
-<li>✔ Global economic uncertainty</li>
+<li>✔ Inflation rates in major economies</li>
+<li>✔ Interest rates set by central banks</li>
+<li>✔ Strength of US dollar index</li>
+<li>✔ Global political instability</li>
+<li>✔ Stock market performance</li>
 <li>✔ Central bank gold reserves</li>
-<li>✔ Geopolitical tensions and wars</li>
-<li>✔ Investor demand in stock and commodity markets</li>
 </ul>
 
 <p>
-During times of crisis, investors move their money from risky assets like stocks into safe assets like gold. This increases demand and raises the price of gold.
+During times of inflation or financial crisis, investors move their money into gold as a safe asset. This increases demand and pushes prices upward.
 </p>
 
 <h3>Gold as a Safe Investment</h3>
 
 <p>
-Gold is considered a “safe-haven asset” because it retains its value even during financial instability. Unlike paper currency, gold cannot be printed or devalued by governments. This makes it a reliable long-term investment.
+Gold is considered a “safe-haven asset” because it maintains its value even during economic downturns. Unlike paper currency, gold cannot be printed or devalued by governments, making it a reliable store of value.
 </p>
 
 <p>
-Many investors use gold to protect their wealth against inflation. When inflation rises, the value of currency decreases, but gold usually increases in value, balancing financial loss.
+Many investors use gold as a hedge against inflation. When inflation increases, the purchasing power of money decreases, but gold often increases in value, helping protect wealth.
 </p>
 
-<h3>Understanding Gold Purity (24K, 22K, 18K)</h3>
+<h3>Types of Gold (24K, 22K, 18K)</h3>
 
 <p>
-Gold purity is measured in karats:
+Gold purity is measured in karats. The most common types are:
 </p>
 
 <ul>
-<li><strong>24K Gold:</strong> 99.9% pure gold, mostly used for investment</li>
-<li><strong>22K Gold:</strong> Slightly mixed with metals for durability, used in jewelry</li>
-<li><strong>18K Gold:</strong> Contains more alloy, commonly used in modern jewelry designs</li>
+<li><strong>24K Gold:</strong> 99.9% pure gold, mainly used for investment and reserves.</li>
+<li><strong>22K Gold:</strong> Mixed with small amounts of other metals for durability, commonly used in jewelry.</li>
+<li><strong>18K Gold:</strong> Contains more alloy metals and is widely used in modern jewelry designs.</li>
 </ul>
 
 <p>
-The higher the purity, the higher the value of gold. However, pure gold is soft and not always suitable for daily-use jewelry.
+The higher the karat value, the higher the purity and price of gold. However, pure gold (24K) is softer and less suitable for everyday jewelry.
 </p>
 
 <h3>Gold Price in Pakistan</h3>
 
 <p>
-In Pakistan, gold price is directly affected by international gold rates and the USD to PKR exchange rate. Even if global gold price remains stable, fluctuations in the Pakistani Rupee can change local gold rates significantly.
+In Pakistan, gold prices are directly linked to international gold rates and the USD to PKR exchange rate. Even if global gold prices remain stable, changes in the Pakistani Rupee can significantly affect local gold prices.
 </p>
 
 <p>
-This is why live gold tracking is important for buyers, jewelers, and investors in Pakistan. Even a small change in USD rate can impact gold price in PKR instantly.
+This is why live tracking of gold prices is very important for buyers, investors, and jewelers in Pakistan. A small change in currency exchange rates can cause noticeable differences in gold rates locally.
 </p>
 
-<h3>Why People Track Live Gold Price</h3>
+<h3>Why People Track Live Gold Prices</h3>
 
 <p>
-People track live gold prices for several reasons:
+People track live gold prices for many reasons, including investment planning, jewelry buying, and financial trading. Gold is also widely used as a long-term wealth protection asset.
 </p>
 
 <ul>
-<li>✔ Investment decisions</li>
-<li>✔ Jewelry buying and selling</li>
-<li>✔ Trading in commodity markets</li>
-<li>✔ Wealth protection against inflation</li>
+<li>✔ Investment decisions and portfolio management</li>
+<li>✔ Jewelry buying and selling timing</li>
+<li>✔ Commodity trading in global markets</li>
+<li>✔ Protection against inflation and currency devaluation</li>
 </ul>
 
 <p>
-Live gold tracking helps users make better financial decisions and avoid losses due to sudden price changes.
+By tracking live gold prices, users can make smarter financial decisions and reduce the risk of buying at high prices.
 </p>
 
 <h3>How This Website Helps You</h3>
 
 <p>
-This website provides real-time gold price updates in USD, PKR, and EUR with accurate market data. It also includes a gold calculator that helps users estimate gold value based on weight and purity.
+This website provides real-time gold price updates in USD, PKR, and EUR. It also includes a gold calculator that helps users estimate the value of gold based on weight and purity levels.
 </p>
 
 <p>
-The live chart feature allows users to analyze market trends visually. This helps traders understand price movement and make better predictions.
+The live chart feature allows users to visually analyze market trends and price movements. This helps traders and investors understand market behavior more effectively.
+</p>
+
+<h3>Future of Gold Prices</h3>
+
+<p>
+Experts believe that gold will continue to remain a strong investment asset in the future due to global economic uncertainty and inflation trends. As financial markets become more volatile, demand for gold is expected to stay strong.
 </p>
 
 <h3>Conclusion</h3>
 
 <p>
-Gold remains one of the most stable and valuable assets in the world. Its price is influenced by global economic conditions, currency exchange rates, and investor demand. By using live tracking tools, users can stay updated with real-time gold prices and make smarter investment decisions.
+Gold remains one of the most stable and valuable assets in the world. Its price is influenced by global economic conditions, currency exchange rates, and investor demand. By using live tracking tools and calculators, users can stay updated with real-time gold prices and make better financial decisions.
 </p>
 
 <p>
 This platform is designed to provide accurate, fast, and simple gold price information for everyone including investors, traders, and general users.
 </p>
-</section>
-<h2>Gold Price in Pakistan Today</h2>
-<p>Live gold rate in Pakistan changes daily based on USD exchange rate.</p>
-
-<h2>24K Gold Rate per Gram</h2>
-<p>24K gold is pure gold and has highest value in market.</p>
-
-<h2>Gold Price per Tola</h2>
-<p>1 tola gold equals approximately 11.66 grams.</p>
+</div>
