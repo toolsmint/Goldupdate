@@ -1,3 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gold Calculator + Live Gold Price Today | USD, PKR, EUR</title>
+
+<meta name="description" content="Calculate gold price per gram or tola and check live gold rates in USD, PKR, EUR with real-time chart.">
+<meta name="keywords" content="gold calculator, gold price today, 24k gold rate, xauusd, gold price Pakistan">
+
+<style>
+body { margin:0; font-family:Arial; background:#0b0b0b; color:#fff; }
+
+header {
+  text-align:center;
+  padding:30px;
+  background:linear-gradient(135deg,#c9a227,#f5d76e);
+  color:#000;
+}
+
+.container { max-width:1100px; margin:auto; padding:20px; }
+
+.card {
+  background:#161616;
+  padding:20px;
+  border-radius:10px;
+  margin-top:20px;
+  border:1px solid #c9a227;
+}
+
+input, select {
+  padding:10px;
+  margin:5px;
+  width:120px;
+}
+
+button {
+  padding:10px 15px;
+  background:#f5d76e;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.result {
+  margin-top:10px;
+  color:#00ff99;
+  font-size:18px;
+}
+
+#chart {
+  margin-top:30px;
+  background:#111;
+  padding:15px;
+  border-radius:10px;
+}
+
+h2 { color:#f5d76e; }
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Gold Calculator + Live Price</h1>
+<p>Calculate Gold Price & View Live Market Chart</p>
+</header>
+
+<div class="container">
+
+<!-- 🔥 CALCULATOR (TOP) -->
+<div class="card">
+<h2>Gold Calculator</h2>
+
+<input type="number" id="weight" placeholder="Weight">
+<select id="unit">
+  <option value="gram">Gram</option>
+  <option value="tola">Tola</option>
+</select>
+
+<select id="karat">
+  <option value="1">24K</option>
+  <option value="0.916">22K</option>
+  <option value="0.75">18K</option>
+</select>
+
+<br>
+
+<button onclick="calculate()">Calculate</button>
+
+<div class="result" id="result"></div>
+</div>
+
+<!-- 📊 CHART (CALCULATOR KE NEECHE) -->
+<div class="card">
+<h2>Live Gold Chart (XAU/USD)</h2>
+<div id="chart">
+  <div id="tradingview_chart"></div>
+</div>
+</div>
+
+<!-- SEO CONTENT -->
+<div class="card">
+<h2>About Gold Price</h2>
+<p>
+Gold price changes daily due to global demand, USD strength, inflation, and market conditions.
+Investors use gold as a safe asset. This page provides live gold rates and calculator for accurate value estimation.
+</p>
+</div>
+
+</div>
+
+<footer style="text-align:center;padding:20px;color:#aaa;">
+© 2026 Gold Tools
+</footer>
+
+<!-- TRADINGVIEW -->
+<script src="https://s3.tradingview.com/tv.js"></script>
+
+<script>
+let goldPrice = 3200;
+
+// live chart
+function loadChart(){
+  if(typeof TradingView !== "undefined"){
+    new TradingView.widget({
+      symbol: "OANDA:XAUUSD",
+      interval: "D",
+      container_id: "tradingview_chart",
+      width: "100%",
+      height: 350,
+      theme: "dark"
+    });
+  }
+}
+
+// calculator
+function calculate(){
+  let weight = parseFloat(document.getElementById("weight").value);
+  let unit = document.getElementById("unit").value;
+  let karat = parseFloat(document.getElementById("karat").value);
+
+  if(!weight){
+    document.getElementById("result").innerText = "Enter weight";
+    return;
+  }
+
+  let base = goldPrice;
+
+  // conversion
+  if(unit === "gram"){
+    weight = weight;
+  } else {
+    weight = weight * 11.66; // 1 tola approx
+  }
+
+  let price = weight * base * karat;
+
+  document.getElementById("result").innerText =
+    "Estimated Value: $" + price.toFixed(2);
+}
+
+// init
+window.onload = function(){
+  loadChart();
+};
+</script>
+
+</body>
+</html>
 <section>
 <h2>Live Gold Price Today – Full Market Analysis</h2>
 
